@@ -1,6 +1,6 @@
-# 🐧 Scripts Bash - Semana 1-2 Linux Mastery
+# 🐧 Scripts Bash - Linux Mastery
 
-Colección de 23 scripts de administración, automatización y monitoreo de sistemas Linux creados durante las primeras dos semanas del roadmap DevOps.
+Colección de +20 scripts de administración, automatización y monitoreo de sistemas Linux creados durante las primeras dos semanas del roadmap DevOps.
 
 ## 📋 Índice de Scripts
 
@@ -9,12 +9,6 @@ Colección de 23 scripts de administración, automatización y monitoreo de sist
 - **`gitbackup.sh`** - Backup automático de repositorios Git
 - **`sqlbackup.sh`** - Backup de bases de datos SQL con compresión
 - **`sqlimport.sh`** - Importación y restauración de backups SQL
-
-### 👥 Gestión de Usuarios
-- **`creaproject.sh`** - Creación automatizada de proyectos con estructura
-- **`eldengamememory.sh`** - Script de gestión de memoria para aplicaciones
-- **`loginverification.sh`** - Verificación y auditoría de logins
-- **`sysinfo.sh`** - Información completa del sistema (CPU, RAM, disco, red...)
 
 ### 🗂️ Gestión de Archivos
 - **`cleantemp.sh`** - Limpieza automática de archivos temporales
@@ -25,7 +19,9 @@ Colección de 23 scripts de administración, automatización y monitoreo de sist
 
 ### 🔐 Seguridad & Contraseñas
 - **`cpuram.sh`** - Limpieza segura de RAM
+- **`loginverification.sh`** - Verificación y auditoría de logins
 - **`passgenerator.sh`** - Generador de contraseñas seguras
+- **`openportsscan.sh`** - Ver los puertos abiertos
 
 ### 📝 Utilidades Diversas
 - **`cmatrix_screensaver.sh`** - Salvapantallas Matrix-style
@@ -37,8 +33,10 @@ Colección de 23 scripts de administración, automatización y monitoreo de sist
 - **`eldengamememory.sh`** - Script de gestión de memoria para aplicaciones
 - **`tablospace.sh`** - Monitoreo de espacio en tablespaces
 - **`timecalc.sh`** - Calculadora de tiempo y conversiones
+- **`creaproject.sh`** - Creación automatizada de proyectos con estructura
+- **`eldengamememory.sh`** - Script de gestión de memoria para aplicaciones
 
-### 📂 Directorios
+### 📂 Directorio
 - **`sysadmin/`** - Scripts adicionales de administración del sistema
 
 ## 🚀 Uso General

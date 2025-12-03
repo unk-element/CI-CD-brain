@@ -1,0 +1,211 @@
+## Procesos:
+ps
+ps aux
+ps aux | grep sshd (no monitoriza en tiempo real)
+top (tiempo real)[dentro pulsa h para help comandos 
+dentro de top, q sale]
+nice --help
+sudo nice -n -10 /usr/sbin/sshd
+sudo nice -n 10 /usr7sbin/sshd
+kill (PID)[sin señal usa la predeterminada -15]
+kill all
+ps aux | grep nano (pront disoinible y el cmd se ejecuta en secu)
+
+## Systemd:
+# Crear servicio simple:
+sudo nano /etc/systemd/system/alrom.service
+
+# alrom.service:
+[Unit]
+Description= Mi app pers
+After=network.target
+
+[Service]
+Type=(simple, forking, oneshot, notify, idle)
+User=usuario
+WorkingDirectory=/home/usuario/miapp
+ExecStart=/usr/bin/python3 /home/usuario/miapp/app.py
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+
+# Comandos esenciales: 
+# Recargar configuración de systemd
+sudo systemctl daemon-reload
+
+# Iniciar servicio
+sudo systemctl start miapp.service
+
+# Habilitar en el arranque
+sudo systemctl enable miapp.service
+
+# Ver estado
+sudo systemctl status miapp.service
+
+# Detener servicio
+sudo systemctl stop miapp.service
+
+# Reiniciar
+sudo systemctl restart miapp.service
+
+# Ver logs
+sudo journalctl -u miapp.service -f
+
+## Cron Jobs y Systemd Timers:
+ crontab -e
+```
+
+**Sintaxis:**
+```
+* * * * * comando
+│ │ │ │ │
+│ │ │ │ └─── Día de la semana (0-7, 0 y 7 = domingo)
+│ │ │ └───── Mes (1-12)
+│ │ └─────── Día del mes (1-31)
+│ └───────── Hora (0-23)
+└─────────── Minuto (0-59)
+
+# Cada 5 minutos
+*/5 * * * * /home/usuario/script.sh
+
+# Cada día a las 3:30 AM
+30 3 * * * /usr/local/bin/backup.sh
+
+# Cada lunes a las 9:00 AM
+0 9 * * 1 /home/usuario/tarea.sh
+
+# Primer día del mes a medianoche
+0 0 1 * * /usr/local/bin/mensual.sh
+
+# Comandos utiles:
+# Ver crontab actual
+crontab -l
+
+# Editar crontab de otro usuario (como root)
+sudo crontab -u usuario -e
+
+# Ver logs de cron
+sudo tail -f /var/log/syslog | grep CRON
+
+## Systemd Timers (alternativa a cron)
+# /etc/systemd/system/backup.service:
+[Unit]
+Description=Backup Service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/backup.sh
+
+# /etc/systemd/system/backup.timer:
+[Unit]
+Description=Ejecutar backup diariamente
+
+[Timer]
+OnCalendar=daily
+OnCalendar=*-*-* 02:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
+# Opciones de tiempo: 
+# Cada 15 minutos
+OnCalendar=*:0/15
+
+# Diariamente a las 2 AM
+OnCalendar=*-*-* 02:00:00
+
+# Cada lunes a las 9 AM
+OnCalendar=Mon *-*-* 09:00:00
+
+# Relativo al arranque del sistema
+OnBootSec=10min
+
+# Relativo a la última ejecución
+OnUnitActiveSec=1h
+
+# comandos:
+# Habilitar timer
+sudo systemctl enable --now backup.timer
+
+# Ver timers activos
+systemctl list-timers
+
+# Ver próxima ejecución
+systemctl status backup.timer
+
+##  Monitoreo de Procesos:
+top -h -k -m -p -1 -q
+o htop (version mejorada)
+
+# Ver todos los procesos
+ps aux
+
+# Ver procesos en formato de árbol
+ps auxf
+
+# Ver procesos de un usuario
+ps -u usuario
+
+# Buscar proceso específico
+ps aux | grep nginx
+
+# Ver formato personalizado
+ps -eo pid,user,%cpu,%mem,command
+
+# Ver hilos de un proceso
+ps -eLf
+
+Columnas importantes:
+PID: ID del proceso
+USER: Usuario propietario
+%CPU: Porcentaje de CPU
+%MEM: Porcentaje de memoria
+VSZ: Memoria virtual
+RSS: Memoria física usada
+STAT: Estado del proceso (R=running, S=sleeping, Z=zombie)
+
+# Ver información de un proceso (reemplazar PID)
+cat /proc/PID/status
+cat /proc/PID/cmdline
+cat /proc/PID/environ
+
+# Límites del sistema
+cat /proc/sys/kernel/pid_max
+
+# Información de CPU
+cat /proc/cpuinfo
+
+# Información de memoria
+cat /proc/meminfo
+
+# Carga del sistema
+cat /proc/loadavg
+
+# Estadísticas de red
+cat /proc/net/dev
+
+# Uso de memoria
+free -h
+
+# Uso de CPU por núcleo
+mpstat -P ALL
+
+# Procesos que más usan recursos
+pidstat 1
+
+# Árbol de procesos
+pstree -p
+
+# Información detallada de proceso
+lsof -p PID
+
+# Matar proceso por nombre
+pkill nombre_proceso
+killall nombre_proceso
+
+# Cambiar prioridad (nice)
+nice -n 10 comando
+renice -n 5 -p PID

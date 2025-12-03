@@ -1,0 +1,19 @@
+sudo dpkg -i <file.deb>, tar, cron
+man, echo, pwd, id, whoami, uname, who,
+date, ncal, expr, figlet,
+top, htop, nohup &, pkill,
+find, which, cut, wc, sort, uniq
+grep, sed, awk
+cd,
+ls: -a, -l/t/r, -h, -R, -S, -X, -1
+cat, head, tail, clear
+cp, mv, rm, rmdir, mkdir
+export, source, uset
+touch, chmod, chown
+dmesg, diff, type, apropos 
+ip, ipconfig, ping, ss, ufw
+APT: show, update, upgrade, install, remove. autoremove
+read, if, for, date
+tar, gzip, zip
+df, du, fdisk
+&&, |, ||, >, >>, /dev/null
